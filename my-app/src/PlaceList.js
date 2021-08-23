@@ -1,25 +1,19 @@
 import React from "react";
+import "./PlaceList.css";
 
-function PlaceList() {
+function PlaceList(props) {
+  const { id, name, website_url, address } = props.place;
   return (
-    <table>
+    <tbody>
       <tr>
-        <th>Business ID</th>
-        <th>Business Name</th>
-        <th>Website</th>
-        <th>Address</th>
+        <td>{id}</td>
+        <td>
+          <a href={`places/` + id}>{name}</a>
+        </td>
+        <td>{website_url}</td>
+        <td>{address}</td>
       </tr>
-      <tr>
-        <td>Jill</td>
-        <td>Smith</td>
-        <td>50</td>
-      </tr>
-      <tr>
-        <td>Eve</td>
-        <td>Jackson</td>
-        <td>94</td>
-      </tr>
-    </table>
+    </tbody>
   );
 }
 

@@ -18,9 +18,21 @@ function App() {
   if (places.places === undefined) {
     return <h1>Loading...</h1>;
   } else {
-    return places.places.map((place) => (
-      <PlaceList key={place.id} place={place} />
-    ));
+    return (
+      <table>
+        <tbody>
+          <tr>
+            <th>Business ID</th>
+            <th>Business Name</th>
+            <th>Website</th>
+            <th>Address</th>
+          </tr>
+        </tbody>
+        {places.places.map((place) => (
+          <PlaceList key={place.id} place={place} />
+        ))}
+      </table>
+    );
   }
 }
 
