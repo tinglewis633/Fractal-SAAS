@@ -1,0 +1,13 @@
+img {
+  width: 500px;
+  height: 500px;
+}
+
+.place {
+  display: flex;
+  flex-direction: row;
+}
+
+p {
+  margin: 0;
+}
