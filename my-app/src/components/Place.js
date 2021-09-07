@@ -31,26 +31,29 @@ function Place() {
       hoursArr.push(day + ":  " + hours[day]);
     }
     return (
-      <div className="place">
-        <img
-          src={logo_url}
-          onError={(e) => {
-            e.target.onerror = null;
-            e.target.src = "/images/noimage.png";
-          }}
-          alt="resource not found"
-        />
-        <ul>
-          <li>Busniess Name: {name} </li>
-          <li>Address: {address} </li>
-          <li>Website: {website_url} </li>
-          <li>
-            Hours:
-            {hoursArr.map((hour) => (
-              <p key={hour.slice(0, 3)}>{hour}</p>
-            ))}
-          </li>
-        </ul>
+      <div className="header">
+        <a href="/">Back to Place List</a>
+        <div className="place">
+          <img
+            src={logo_url}
+            onError={(e) => {
+              e.target.onerror = null;
+              e.target.src = "/images/noimage.png";
+            }}
+            alt="resource not found"
+          />
+          <ul>
+            <li>Busniess Name: {name} </li>
+            <li>Address: {address} </li>
+            <li>Website: {website_url} </li>
+            <li>
+              Hours:
+              {hoursArr.map((hour) => (
+                <p key={hour.slice(0, 3)}>{hour}</p>
+              ))}
+            </li>
+          </ul>
+        </div>
       </div>
     );
   }
