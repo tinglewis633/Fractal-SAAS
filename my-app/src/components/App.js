@@ -1,21 +1,36 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import PlaceList from "./PlaceList";
-import {
-  InfoWindow,
-  withScriptjs,
-  withGoogleMap,
-  GoogleMap,
-  Marker,
-} from "react-google-maps";
+
 import "../styles/App.css";
 
 function App() {
+  //useState
   const [places, setPlaces] = useState({});
   const [search, setSearch] = useState("");
-  function Map() {
-    //convert address to lat and lng and set it to data using geo api
 
+  //targeting user input and set it to state
+  const searchPlace = (e) => {
+    e.preventDefault();
+    setSearch(e.target.value);
+  };
+
+  //fetching data
+  useEffect(() => {
+    axios
+      .get("https://610bb7502b6add0017cb3a35.mockapi.io/api/v1/places")
+      .then((data) => {
+        setPlaces((prev) => ({
+          ...prev,
+          places: data.data,
+        }));
+      });
+  }, []);
+
+  //conditional rendering
+  if (!places.places) {
+    return <h1>Loading...</h1>;
+  } else {
     places.places.map((place) => {
       axios
         .get("https://maps.googleapis.com/maps/api/geocode/json", {
@@ -29,43 +44,6 @@ function App() {
           place.lng = response.data.results[0].geometry.location.lng;
         });
     });
-
-    return (
-      <GoogleMap
-        defaultZoom={10}
-        defaultCenter={{ lat: 43.6532, lng: -79.3832 }}
-      >
-        {
-      
-          places.places.map((place) => {
-             <Marker position={{ lat: place.lat, lng: place.lng }} />;
-          })
-        }
-        <Marker position={{ lat: 43.6532, lng: -79.3832 }} />;
-      </GoogleMap>
-    );
-  }
-
-  const WrappedMap = withScriptjs(withGoogleMap(Map));
-
-  const searchPlace = (e) => {
-    e.preventDefault();
-    setSearch(e.target.value);
-  };
-  //fetching data
-  useEffect(() => {
-    axios
-      .get("https://610bb7502b6add0017cb3a35.mockapi.io/api/v1/places")
-      .then((data) => {
-        setPlaces((prev) => ({
-          ...prev,
-          places: data.data,
-        }));
-      });
-  }, []);
-  if (!places.places) {
-    return <h1>Loading...</h1>;
-  } else {
     return (
       <div className="table">
         <input
@@ -83,6 +61,7 @@ function App() {
               <th>Address</th>
             </tr>
           </tbody>
+
           {places.places
             // filter from what is in the search bar input
             .filter(
@@ -96,17 +75,6 @@ function App() {
         </table>
 
         <h1>Map</h1>
-
-        <div className="map">
-          <WrappedMap
-            googleMapURL="https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,places&key=AIzaSyBgxJ-padRN_a3sczwqk7sB1NPkuObA2gk"
-            loadingElement={<div style={{ height: `100%`, width: `100%` }} />}
-            containerElement={
-              <div id="map" style={{ height: `350px`, width: `90%` }} />
-            }
-            mapElement={<div style={{ height: `100%`, width: `100%` }} />}
-          />
-        </div>
       </div>
     );
   }

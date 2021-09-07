@@ -1,6 +1,5 @@
 .table {
   overflow-x: auto;
-
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -9,17 +8,7 @@
 
 .searchbar {
   width: 70%;
-
   margin: 5px 5px;
-}
-
-.map {
-  width: 100%;
-  height: 350px;
-  padding-bottom: 20px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
 }
 
 @media only screen and (max-width: 1000px) {
