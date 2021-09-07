@@ -7,7 +7,7 @@ import Place from "./components/Place";
 import { BrowserRouter, Route, Switch, Redirect } from "react-router-dom";
 
 ReactDOM.render(
-  <React.StrictMode>
+  <React.Fragment>
     <BrowserRouter>
       <Switch>
         <Route exact path="/">
@@ -21,6 +21,6 @@ ReactDOM.render(
         <Route render={() => <Redirect to="/" />} />
       </Switch>
     </BrowserRouter>
-  </React.StrictMode>,
+  </React.Fragment>,
   document.getElementById("root")
 );
