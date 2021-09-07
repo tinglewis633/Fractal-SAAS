@@ -5,6 +5,8 @@ import "../styles/App.css";
 
 function App() {
   const [places, setPlaces] = useState({});
+
+  //fetching data
   useEffect(() => {
     axios
       .get("https://610bb7502b6add0017cb3a35.mockapi.io/api/v1/places")

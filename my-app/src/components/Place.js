@@ -6,6 +6,8 @@ function Place() {
   const [place, setPlace] = useState({});
   const params = useParams();
   const id = params.id;
+
+  //fetching data
   useEffect(() => {
     axios
       .get("https://610bb7502b6add0017cb3a35.mockapi.io/api/v1/places")
@@ -22,10 +24,11 @@ function Place() {
   } else {
     const { hours, name, website_url, address, logo_url } = place.place[0];
     const hoursArr = [];
+
+    //reformat the hours data
     for (const day in hours) {
       hoursArr.push(day + hours[day]);
     }
-
     return (
       <div className="place">
         <img src={logo_url} alt="image resource not found"></img>
