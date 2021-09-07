@@ -31,19 +31,6 @@ function App() {
   if (!places.places) {
     return <h1>Loading...</h1>;
   } else {
-    places.places.map((place) => {
-      axios
-        .get("https://maps.googleapis.com/maps/api/geocode/json", {
-          params: {
-            address: place.address,
-            key: "AIzaSyBgxJ-padRN_a3sczwqk7sB1NPkuObA2gk",
-          },
-        })
-        .then((response) => {
-          place.lat = response.data.results[0].geometry.location.lat;
-          place.lng = response.data.results[0].geometry.location.lng;
-        });
-    });
     return (
       <div className="table">
         <input
