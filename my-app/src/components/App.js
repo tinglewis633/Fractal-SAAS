@@ -5,7 +5,17 @@ import "../styles/App.css";
 
 function App() {
   const [places, setPlaces] = useState({});
+  const [search, setSearch] = useState("");
 
+  const Search = (e) => {
+    e.preventDefault();
+    setSearch(e.target.value);
+    const result = places.places.filter(
+      (place) =>
+        place.name.toLowerCase().includes(search.toLowerCase()) ||
+        place.address.toLowerCase().includes(search.toLowerCase())
+    );
+  };
   //fetching data
   useEffect(() => {
     axios
@@ -22,6 +32,12 @@ function App() {
   } else {
     return (
       <div className="table">
+        <input
+          className="searchbar"
+          type="text"
+          placeholder="Search place name or address"
+          onChange={Search}
+        ></input>
         <table>
           <tbody>
             <tr>
@@ -31,9 +47,16 @@ function App() {
               <th>Address</th>
             </tr>
           </tbody>
-          {places.places.map((place) => (
-            <PlaceList key={place.id} place={place} />
-          ))}
+          {places.places
+            // filter from what is in the search bar input
+            .filter(
+              (place) =>
+                place.name.toLowerCase().includes(search.toLowerCase()) ||
+                place.address.toLowerCase().includes(search.toLowerCase())
+            )
+            .map((place) => (
+              <PlaceList key={place.id} place={place} />
+            ))}
         </table>
       </div>
     );
