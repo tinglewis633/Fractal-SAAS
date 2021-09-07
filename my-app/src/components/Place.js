@@ -17,7 +17,7 @@ function Place() {
           place: data.data.filter((place) => place.id === id),
         }));
       });
-  }, []);
+  }, [id]);
 
   if (!place.place) {
     return <h1>loading...</h1>;
@@ -31,7 +31,7 @@ function Place() {
     }
     return (
       <div className="place">
-        <img src={logo_url} alt="image resource not found"></img>
+        <img src={logo_url} alt="resource not found"></img>
         <ul>
           <li>Busniess Name: {name} </li>
           <li>Address: {address} </li>
@@ -39,7 +39,7 @@ function Place() {
           <li>
             Hours:
             {hoursArr.map((hour) => (
-              <p>{hour}</p>
+              <p key={hour.slice(0, 3)}>{hour}</p>
             ))}
           </li>
         </ul>
