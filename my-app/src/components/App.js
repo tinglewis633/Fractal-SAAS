@@ -21,19 +21,21 @@ function App() {
     return <h1>Loading...</h1>;
   } else {
     return (
-      <table>
-        <tbody>
-          <tr>
-            <th>Business ID</th>
-            <th>Business Name</th>
-            <th>Website</th>
-            <th>Address</th>
-          </tr>
-        </tbody>
-        {places.places.map((place) => (
-          <PlaceList key={place.id} place={place} />
-        ))}
-      </table>
+      <div className="table">
+        <table>
+          <tbody>
+            <tr>
+              <th>Business ID</th>
+              <th>Business Name</th>
+              <th>Website</th>
+              <th>Address</th>
+            </tr>
+          </tbody>
+          {places.places.map((place) => (
+            <PlaceList key={place.id} place={place} />
+          ))}
+        </table>
+      </div>
     );
   }
 }

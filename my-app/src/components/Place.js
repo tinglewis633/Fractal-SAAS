@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useParams } from "react-router-dom";
 import "../styles/Place.css";
-import noimage from "../images/noimage.png";
+
 function Place() {
   const [place, setPlace] = useState({});
   const params = useParams();
@@ -28,7 +28,7 @@ function Place() {
 
     //reformat the hours data
     for (const day in hours) {
-      hoursArr.push(day + hours[day]);
+      hoursArr.push(day + ":  " + hours[day]);
     }
     return (
       <div className="place">
