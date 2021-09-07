@@ -4,7 +4,10 @@ import { useParams } from "react-router-dom";
 import "../styles/Place.css";
 
 function Place() {
+  //useState
   const [place, setPlace] = useState({});
+
+  //require the id coming from the URL
   const params = useParams();
   const id = params.id;
 
@@ -20,6 +23,7 @@ function Place() {
       });
   }, [id]);
 
+  //conditional rendering
   if (!place.place) {
     return <h1>loading...</h1>;
   } else {
