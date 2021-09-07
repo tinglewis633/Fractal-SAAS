@@ -1,5 +1,5 @@
 import React from "react";
-import "./PlaceList.css";
+import "../styles/PlaceList.css";
 
 function PlaceList(props) {
   const { id, name, website_url, address } = props.place;

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useParams } from "react-router-dom";
-import "./place.css";
+import "../styles/Place.css";
 function Place() {
   const [place, setPlace] = useState({});
   const params = useParams();
@@ -17,7 +17,7 @@ function Place() {
       });
   }, []);
 
-  if (place.place === undefined) {
+  if (!place.place) {
     return <h1>loading...</h1>;
   } else {
     const { hours, name, website_url, address, logo_url } = place.place[0];
@@ -26,7 +26,6 @@ function Place() {
       hoursArr.push(day + hours[day]);
     }
 
-    console.log(hoursArr);
     return (
       <div className="place">
         <img src={logo_url} alt="image resource not found"></img>

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import PlaceList from "./PlaceList";
-import "./App.css";
+import "../styles/App.css";
 
 function App() {
   const [places, setPlaces] = useState({});
@@ -15,7 +15,7 @@ function App() {
         }));
       });
   }, []);
-  if (places.places === undefined) {
+  if (!places.places) {
     return <h1>Loading...</h1>;
   } else {
     return (

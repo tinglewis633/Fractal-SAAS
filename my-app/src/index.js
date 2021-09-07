@@ -1,8 +1,8 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import "./index.css";
-import App from "./App";
-import Place from "./Place";
+import "./styles/Index.css";
+import App from "./components/App";
+import Place from "./components/Place";
 
 import { BrowserRouter, Route, Switch, Redirect } from "react-router-dom";
 
