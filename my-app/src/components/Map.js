@@ -1,12 +1,16 @@
 import React, { useState } from "react";
+import axios from "axios";
 import {
   GoogleMap,
   useJsApiLoader,
   Marker,
   InfoWindow,
 } from "@react-google-maps/api";
+import { placeStore } from "./Store";
 import "../styles/Map.css";
 function Map(props) {
+  //bring in places state
+  const places = placeStore.useState((s) => s.places);
   //googlemap setup
   const containerStyle = {
     width: "85%",
@@ -17,6 +21,8 @@ function Map(props) {
     lat: 43.4532,
     lng: -79.5832,
   };
+
+  const zoom = 9;
 
   const { isLoaded } = useJsApiLoader({
     id: "google-map-script",
@@ -38,17 +44,39 @@ function Map(props) {
 
   //conditional rendering
 
-  return isLoaded ? (
+  return isLoaded && places ? (
     <GoogleMap
       id="map"
       mapContainerStyle={containerStyle}
       center={center}
-      zoom={9}
+      zoom={zoom}
       onLoad={onLoad}
       onUnmount={onUnmount}
     >
+      {/* use geo api to add lat lng to all places data */}
+      {/* {places.map((place) =>
+        axios
+          .get("https://maps.googleapis.com/maps/api/geocode/json", {
+            params: {
+              address: place.address,
+              key: "AIzaSyBgxJ-padRN_a3sczwqk7sB1NPkuObA2gk",
+            },
+          })
+          .then((response) => {
+            return [
+              response.data.results[0].geometry.location.lat,
+              response.data.results[0].geometry.location.lng,
+            ];
+            // place.lat = response.data.results[0].geometry.location.lat;
+            // place.lng = response.data.results[0].geometry.location.lng;
+          })
+          .then((response) => {
+            console.log("RESPONSE", response);
+          })
+      )} */}
       {/* loop through places, for each coordinate of a place, set a marker for it */}
-      {props.places.map((place) => (
+
+      {/* {places.map((place) => (
         <Marker
           key={place.id}
           position={{ lat: place.lat, lng: place.lng }}
@@ -62,7 +90,7 @@ function Map(props) {
             setSelectedPlace(place);
           }}
         />
-      ))}
+      ))} */}
       {selectedPlace && (
         <InfoWindow
           position={{ lat: selectedPlace.lat, lng: selectedPlace.lng }}
