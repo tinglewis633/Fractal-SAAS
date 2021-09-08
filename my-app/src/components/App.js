@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import PlaceList from "./PlaceList";
-import GoogleMap from "./GoogleMap";
+import Map from "./Map";
 
 import "../styles/App.css";
 
@@ -76,7 +76,7 @@ function App() {
         </table>
 
         <h1>Map</h1>
-        <GoogleMap places={places.places}></GoogleMap>
+        <Map places={places.places}></Map>
       </div>
     );
   }
