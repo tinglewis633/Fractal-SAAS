@@ -9,7 +9,7 @@ function App() {
   //useState
   const [places, setPlaces] = useState([]);
   const [search, setSearch] = useState("");
-
+  const [loadLatitude, setLoadLatitude] = useState(true);
   //targeting user input and set it to state
   const searchPlace = (e) => {
     e.preventDefault();
@@ -32,6 +32,7 @@ function App() {
   if (!places.places) {
     return <h1>Loading...</h1>;
   } else {
+    // use geo api to add lat lng to all places data
     places.places.map((place) =>
       axios
         .get("https://maps.googleapis.com/maps/api/geocode/json", {
@@ -76,7 +77,7 @@ function App() {
         </table>
 
         <h1>Map</h1>
-        <Map places={places.places}></Map>
+        <Map loadLatitude={loadLatitude} places={places.places}></Map>
       </div>
     );
   }

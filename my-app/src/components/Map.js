@@ -14,7 +14,7 @@ function Map(props) {
   };
 
   const center = {
-    lat: 43.6532,
+    lat: 43.4532,
     lng: -79.5832,
   };
 
@@ -37,12 +37,13 @@ function Map(props) {
   }, []);
 
   //conditional rendering
+
   return isLoaded ? (
     <GoogleMap
       id="map"
       mapContainerStyle={containerStyle}
       center={center}
-      zoom={10}
+      zoom={9}
       onLoad={onLoad}
       onUnmount={onUnmount}
     >
