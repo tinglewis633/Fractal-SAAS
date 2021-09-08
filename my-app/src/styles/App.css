@@ -8,7 +8,8 @@
 
 .searchbar {
   width: 70%;
-  margin: 5px 5px;
+  margin: 30px;
+  height: 2em;
 }
 
 @media only screen and (max-width: 1000px) {

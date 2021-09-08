@@ -5,7 +5,7 @@ import {
   Marker,
   InfoWindow,
 } from "@react-google-maps/api";
-
+import "../styles/Map.css";
 function Map(props) {
   //googlemap setup
   const containerStyle = {
@@ -15,7 +15,7 @@ function Map(props) {
 
   const center = {
     lat: 43.6532,
-    lng: -79.583,
+    lng: -79.5832,
   };
 
   const { isLoaded } = useJsApiLoader({
@@ -39,6 +39,7 @@ function Map(props) {
   //conditional rendering
   return isLoaded ? (
     <GoogleMap
+      id="map"
       mapContainerStyle={containerStyle}
       center={center}
       zoom={10}
