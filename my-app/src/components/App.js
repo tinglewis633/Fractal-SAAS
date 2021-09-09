@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import axios from "axios";
 import PlaceList from "./PlaceList";
 import Map from "./Map";
@@ -18,30 +18,32 @@ function App() {
     });
   };
 
-  //fetching data
-  axios
-    .get("https://610bb7502b6add0017cb3a35.mockapi.io/api/v1/places")
-    .then((data) => {
-      placeStore.update((s) => {
-        s.places = data.data;
-      });
-    });
-
-  places.map((place) =>
+  useEffect(() => {
+    //fetching data
     axios
-      .get("https://maps.googleapis.com/maps/api/geocode/json", {
-        params: {
-          address: place.address,
-          key: "AIzaSyBgxJ-padRN_a3sczwqk7sB1NPkuObA2gk",
-        },
-      })
-      .then((response) => {
-        return [
-          response.data.results[0].geometry.location.lat,
-          response.data.results[0].geometry.location.lng,
-        ];
-      })
-  );
+      .get("https://610bb7502b6add0017cb3a35.mockapi.io/api/v1/places")
+      .then((data) => {
+        placeStore.update((s) => {
+          s.places = data.data;
+        });
+      });
+  }, []);
+
+  // places.map((place) =>
+  //   axios
+  //     .get("https://maps.googleapis.com/maps/api/geocode/json", {
+  //       params: {
+  //         address: place.address,
+  //         key: "AIzaSyBgxJ-padRN_a3sczwqk7sB1NPkuObA2gk",
+  //       },
+  //     })
+  //     .then((response) => {
+  //       return [
+  //         response.data.results[0].geometry.location.lat,
+  //         response.data.results[0].geometry.location.lng,
+  //       ];
+  //     })
+  // );
 
   //conditional rendering
   if (!places) {

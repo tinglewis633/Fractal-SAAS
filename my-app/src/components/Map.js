@@ -18,8 +18,8 @@ function Map(props) {
   };
 
   const center = {
-    lat: 43.4532,
-    lng: -79.5832,
+    lat: 43.453,
+    lng: -79.583,
   };
 
   const zoom = 9;
@@ -53,27 +53,6 @@ function Map(props) {
       onLoad={onLoad}
       onUnmount={onUnmount}
     >
-      {/* use geo api to add lat lng to all places data */}
-      {/* {places.map((place) =>
-        axios
-          .get("https://maps.googleapis.com/maps/api/geocode/json", {
-            params: {
-              address: place.address,
-              key: "AIzaSyBgxJ-padRN_a3sczwqk7sB1NPkuObA2gk",
-            },
-          })
-          .then((response) => {
-            return [
-              response.data.results[0].geometry.location.lat,
-              response.data.results[0].geometry.location.lng,
-            ];
-            // place.lat = response.data.results[0].geometry.location.lat;
-            // place.lng = response.data.results[0].geometry.location.lng;
-          })
-          .then((response) => {
-            console.log("RESPONSE", response);
-          })
-      )} */}
       {/* loop through places, for each coordinate of a place, set a marker for it */}
 
       {/* {places.map((place) => (
