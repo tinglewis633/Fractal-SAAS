@@ -26,6 +26,7 @@ function App() {
   //use geo api to add lat lng to places data and set it to a new state called GeoedPlaces
   if (places) {
     const dummyGeoPlaces = [];
+    let offsetNum = 0.001;
     places.map((place) =>
       axios
         .get("https://maps.googleapis.com/maps/api/geocode/json", {
@@ -35,9 +36,12 @@ function App() {
           },
         })
         .then((response) => {
+          //offsetting the coor if they have exact same address
+          offsetNum = offsetNum + 0.001;
+
           const newPlace = Object.assign(
             {
-              lat: response.data.results[0].geometry.location.lat,
+              lat: response.data.results[0].geometry.location.lat + offsetNum,
               lng: response.data.results[0].geometry.location.lng,
             },
             place
