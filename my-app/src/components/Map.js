@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import axios from "axios";
 import {
   GoogleMap,
   useJsApiLoader,
@@ -8,9 +7,11 @@ import {
 } from "@react-google-maps/api";
 import { placeStore } from "./Store";
 import "../styles/Map.css";
-function Map(props) {
-  //bring in places state
+function Map() {
   const places = placeStore.useState((s) => s.places);
+  const geoedPlaces = placeStore.useState((s) => s.geoedPlaces);
+  const search = placeStore.useState((s) => s.search);
+
   //googlemap setup
   const containerStyle = {
     width: "85%",
@@ -58,21 +59,21 @@ function Map(props) {
         >
           {/* loop through places, for each coordinate of a place, set a marker for it */}
 
-          {/* {places.map((place) => (
-        <Marker
-          key={place.id}
-          position={{ lat: place.lat, lng: place.lng }}
-          label={{
-            text: place.id,
-            color: "black",
-            fontWeight: "bold",
-            fontSize: "16px",
-          }}
-          onClick={() => {
-            setSelectedPlace(place);
-          }}
-        />
-      ))} */}
+          {geoedPlaces
+            .filter(
+              (place) =>
+                place.name.toLowerCase().includes(search.toLowerCase()) ||
+                place.address.toLowerCase().includes(search.toLowerCase())
+            )
+            .map((place) => (
+              <Marker
+                key={place.id}
+                position={{ lat: place.lat, lng: place.lng }}
+                onClick={() => {
+                  setSelectedPlace(place);
+                }}
+              />
+            ))}
           {selectedPlace && (
             <InfoWindow
               position={{ lat: selectedPlace.lat, lng: selectedPlace.lng }}

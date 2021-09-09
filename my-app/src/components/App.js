@@ -23,24 +23,33 @@ function App() {
       });
   }, []);
 
-  // places.map((place) =>
-  //   axios
-  //     .get("https://maps.googleapis.com/maps/api/geocode/json", {
-  //       params: {
-  //         address: place.address,
-  //         key: "AIzaSyBgxJ-padRN_a3sczwqk7sB1NPkuObA2gk",
-  //       },
-  //     })
-  //     .then((response) => {
-  //       return [
-  // placeStore.update((s) => {
-  //   s.places = data.data;
-  // });
-  //         response.data.results[0].geometry.location.lat,
-  //         response.data.results[0].geometry.location.lng,
-  //       ];
-  //     })
-  // );
+  //use geo api to add lat lng to places data and set it to a new state called GeoedPlaces
+  if (places) {
+    const dummyGeoPlaces = [];
+    places.map((place) =>
+      axios
+        .get("https://maps.googleapis.com/maps/api/geocode/json", {
+          params: {
+            address: place.address,
+            key: "AIzaSyBgxJ-padRN_a3sczwqk7sB1NPkuObA2gk",
+          },
+        })
+        .then((response) => {
+          const newPlace = Object.assign(
+            {
+              lat: response.data.results[0].geometry.location.lat,
+              lng: response.data.results[0].geometry.location.lng,
+            },
+            place
+          );
+          dummyGeoPlaces.push(newPlace);
+          placeStore.update((s) => {
+            s.geoedPlaces = [...dummyGeoPlaces];
+          });
+          return;
+        })
+    );
+  }
 
   //conditional rendering
   if (!places) {

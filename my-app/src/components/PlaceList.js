@@ -1,9 +1,10 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "../styles/PlaceList.css";
 import { placeStore } from "./Store";
 function PlaceList() {
   const places = placeStore.useState((s) => s.places);
   const search = placeStore.useState((s) => s.search);
+
   return (
     <table>
       <tbody>
@@ -22,7 +23,7 @@ function PlaceList() {
               place.address.toLowerCase().includes(search.toLowerCase())
           )
           .map((place) => (
-            <tr>
+            <tr key={place.id}>
               <td>{place.id}</td>
               <td>
                 <a href={`places/` + place.id}>{place.name}</a>
