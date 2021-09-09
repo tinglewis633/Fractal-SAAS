@@ -44,18 +44,21 @@ function Map(props) {
 
   //conditional rendering
 
-  return isLoaded && places ? (
-    <GoogleMap
-      id="map"
-      mapContainerStyle={containerStyle}
-      center={center}
-      zoom={zoom}
-      onLoad={onLoad}
-      onUnmount={onUnmount}
-    >
-      {/* loop through places, for each coordinate of a place, set a marker for it */}
+  return (
+    <div className="map">
+      <h1>Map</h1>
+      {isLoaded && places ? (
+        <GoogleMap
+          id="map"
+          mapContainerStyle={containerStyle}
+          center={center}
+          zoom={zoom}
+          onLoad={onLoad}
+          onUnmount={onUnmount}
+        >
+          {/* loop through places, for each coordinate of a place, set a marker for it */}
 
-      {/* {places.map((place) => (
+          {/* {places.map((place) => (
         <Marker
           key={place.id}
           position={{ lat: place.lat, lng: place.lng }}
@@ -70,24 +73,26 @@ function Map(props) {
           }}
         />
       ))} */}
-      {selectedPlace && (
-        <InfoWindow
-          position={{ lat: selectedPlace.lat, lng: selectedPlace.lng }}
-          onCloseClick={() => {
-            setSelectedPlace(null);
-          }}
-        >
-          <div>
-            <h3>
-              {selectedPlace.name}({selectedPlace.id})
-            </h3>
-            <p>{selectedPlace.address}</p>
-          </div>
-        </InfoWindow>
+          {selectedPlace && (
+            <InfoWindow
+              position={{ lat: selectedPlace.lat, lng: selectedPlace.lng }}
+              onCloseClick={() => {
+                setSelectedPlace(null);
+              }}
+            >
+              <div>
+                <h3>
+                  {selectedPlace.name}({selectedPlace.id})
+                </h3>
+                <p>{selectedPlace.address}</p>
+              </div>
+            </InfoWindow>
+          )}
+        </GoogleMap>
+      ) : (
+        <></>
       )}
-    </GoogleMap>
-  ) : (
-    <></>
+    </div>
   );
 }
 
