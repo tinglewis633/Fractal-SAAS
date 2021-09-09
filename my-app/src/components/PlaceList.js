@@ -1,11 +1,36 @@
 import React from "react";
 import "../styles/PlaceList.css";
-
-function PlaceList(props) {
-  const { id, name, website_url, address } = props.place;
+import { placeStore } from "./Store";
+function PlaceList() {
+  const places = placeStore.useState((s) => s.places);
+  const search = placeStore.useState((s) => s.search);
   return (
     <tbody>
-      <tr>
+      {places
+        .filter(
+          (place) =>
+            place.name.toLowerCase().includes(search.toLowerCase()) ||
+            place.address.toLowerCase().includes(search.toLowerCase())
+        )
+        .map((place) => (
+          <tr>
+            <td>{place.id}</td>
+            <td>
+              <a href={`places/` + place.id}>{place.name}</a>
+            </td>
+            <td>{place.website_url}</td>
+            <td>{place.address}</td>
+          </tr>
+        ))}
+    </tbody>
+  );
+}
+
+export default PlaceList;
+
+/*
+            <tbody> 
+        <tr>
         <td>{id}</td>
         <td>
           <a href={`places/` + id}>{name}</a>
@@ -13,8 +38,4 @@ function PlaceList(props) {
         <td>{website_url}</td>
         <td>{address}</td>
       </tr>
-    </tbody>
-  );
-}
-
-export default PlaceList;
+        </tbody> */

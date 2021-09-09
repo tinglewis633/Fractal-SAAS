@@ -9,7 +9,7 @@ import "../styles/App.css";
 const arr = [];
 function App() {
   //bring in places and search state
-  const search = placeStore.useState((s) => s.search);
+
   const places = placeStore.useState((s) => s.places);
   //targeting user input and set it to state
   const searchPlace = (e) => {
@@ -39,6 +39,9 @@ function App() {
   //     })
   //     .then((response) => {
   //       return [
+  // placeStore.update((s) => {
+  //   s.places = data.data;
+  // });
   //         response.data.results[0].geometry.location.lat,
   //         response.data.results[0].geometry.location.lng,
   //       ];
@@ -67,7 +70,7 @@ function App() {
             </tr>
           </tbody>
 
-          {places
+          {/* {places
             // filter from what is in the search bar input
             .filter(
               (place) =>
@@ -75,8 +78,10 @@ function App() {
                 place.address.toLowerCase().includes(search.toLowerCase())
             )
             .map((place) => (
-              <PlaceList key={place.id} place={place} />
-            ))}
+              <PlaceList />
+            ))} */}
+
+          <PlaceList />
         </table>
 
         <h1>Map</h1>
