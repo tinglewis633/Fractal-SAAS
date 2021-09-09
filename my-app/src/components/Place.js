@@ -1,33 +1,34 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import axios from "axios";
 import { useParams } from "react-router-dom";
 import "../styles/Place.css";
-
+import { placeStore } from "./Store";
 function Place() {
-  //useState
-  const [place, setPlace] = useState({});
+  const places = placeStore.useState((s) => s.places);
+
+  useEffect(() => {
+    //fetching data
+    axios
+      .get("https://610bb7502b6add0017cb3a35.mockapi.io/api/v1/places")
+      .then((data) => {
+        placeStore.update((s) => {
+          s.places = data.data;
+        });
+      });
+  }, []);
 
   //require the id coming from the URL
   const params = useParams();
   const id = params.id;
 
-  //fetching data
-  useEffect(() => {
-    axios
-      .get("https://610bb7502b6add0017cb3a35.mockapi.io/api/v1/places")
-      .then((data) => {
-        setPlace((prev) => ({
-          ...prev,
-          place: data.data.filter((place) => place.id === id),
-        }));
-      });
-  }, [id]);
-
   //conditional rendering
-  if (!place.place) {
+  if (places.length === 0) {
     return <h1>loading...</h1>;
   } else {
-    const { hours, name, website_url, address, logo_url } = place.place[0];
+    console.log(places.filter((place) => place.id === id));
+    const { hours, name, website_url, address, logo_url } = places.filter(
+      (place) => place.id === id
+    )[0];
     const hoursArr = [];
 
     //reformat the hours data
