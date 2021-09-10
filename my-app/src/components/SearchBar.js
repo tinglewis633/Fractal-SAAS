@@ -20,14 +20,3 @@ function SearchBar() {
 
 export default SearchBar;
 
-/*
-            <tbody> 
-        <tr>
-        <td>{id}</td>
-        <td>
-          <a href={`places/` + id}>{name}</a>
-        </td>
-        <td>{website_url}</td>
-        <td>{address}</td>
-      </tr>
-        </tbody> */

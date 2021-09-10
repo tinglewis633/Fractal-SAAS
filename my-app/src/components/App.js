@@ -10,7 +10,6 @@ import Map from "./Map";
 
 function App() {
   const places = placeStore.useState((s) => s.places);
-  //targeting user input and set it to state
 
   useEffect(() => {
     //fetching data
